@@ -49,13 +49,13 @@
                   <el-radio class='radio' label='no' disabled border>No</el-radio>
                 </el-radio-group>
               </div>
-              <div class="action-section">
+              <!-- <div class="action-section">
                 <p>We would have to record your public key, and store in a database. Are you OK with that?</p>
                 <el-radio-group v-model='public_key_consent' size="large">
                   <el-radio class='radio' label='yes' border>Yes</el-radio>
                   <el-radio class='radio' label='no' border>No</el-radio>
                 </el-radio-group>
-              </div>
+              </div> -->
               <div class="action-section">
                 <p>Would you like to see the progress of creating the contract?&nbsp;&nbsp;:&nbsp;)</p>
                 <el-radio-group v-model='show_progress' size="large">
@@ -267,10 +267,12 @@ export default {
       }, {
         field: 'Anonymousity',
         selection: 'No'
-      }, {
-        field: 'Public Key Recording Consent',
-        selection: 'Yes'
-      }, {
+      }, 
+      // {
+      //   field: 'Public Key Recording Consent',
+      //   selection: 'Yes'
+      // }, 
+      {
         field: 'See the Process : )',
         selection: 'Yes'
       }, {
