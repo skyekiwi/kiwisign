@@ -27,8 +27,12 @@
               <div class="action-section">
                 <p>Select which storage network do you want to use:</p>
                 <el-radio-group v-model='storage_network' size="large">
-                  <el-radio class='radio' label='crust' border>Crust Network</el-radio>
-                  <el-radio class='radio' label='arweave' border>Arweave</el-radio>
+                  <el-tooltip content="Cheap but valid for 2 years." placement="bottom">
+                    <el-radio class='radio' label='crust' border>Crust Network</el-radio>
+                  </el-tooltip>
+                  <el-tooltip content="About 5 times the fee of the Crust Network. Permenat" placement="bottom">
+                    <el-radio class='radio' label='arweave' border>Arweave</el-radio>
+                  </el-tooltip>
                 </el-radio-group>
               </div>
               <div class="action-section">
@@ -175,7 +179,7 @@
                 highlight-current-row
                 style="width: 100%">
                   <el-table-column
-                    property="key"
+                    property="field"
                     label="Field"
                     width='350'>
                   </el-table-column>
@@ -255,22 +259,22 @@ export default {
         role: 'Creator'
       }],
       review: [{
-        key: 'Network Selection',
+        field: 'Network Selection',
         selection: 'Crust Network'
       }, {
-        key: 'Pre-paid Fees',
+        field: 'Pre-paid Fees',
         selection: 'Yes'
       }, {
-        key: 'Anonymousity',
+        field: 'Anonymousity',
         selection: 'No'
       }, {
-        key: 'Public Key Recording Consent',
+        field: 'Public Key Recording Consent',
         selection: 'Yes'
       }, {
-        key: 'See the Process : )',
+        field: 'See the Process : )',
         selection: 'Yes'
       }, {
-        key: 'Contract',
+        field: 'Contract',
         selection: 'xxxx.pdf'
       }],
       loading: false
