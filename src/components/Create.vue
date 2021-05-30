@@ -179,6 +179,10 @@
                 highlight-current-row
                 style="width: 100%">
                   <el-table-column
+                    type="index"
+                    width="50">
+                  </el-table-column>
+                  <el-table-column
                     property="field"
                     label="Field"
                     width='350'>
@@ -251,7 +255,7 @@ export default {
       meta_tx: 'yes',
       anonymousity: 'no',
       public_key_consent: 'yes',
-      show_progress: 'yes',
+      show_progress: 'no',
       new_recipient: '',
       recipients: [{
         public_address: '5DFhSMLmnw3Fgc6trbp8AuErcZoJS64gDFHUemqh2FRYdtoC (Yourself)',
@@ -267,12 +271,7 @@ export default {
       }, {
         field: 'Anonymousity',
         selection: 'No'
-      }, 
-      // {
-      //   field: 'Public Key Recording Consent',
-      //   selection: 'Yes'
-      // }, 
-      {
+      }, {
         field: 'See the Process : )',
         selection: 'Yes'
       }, {
