@@ -243,10 +243,12 @@
 
 <script>
 import router from '@/router.js'
+import * as SkyeKiwi from '@skyekiwi/protocol'
 
 export default {
   name: 'Create',
   mounted () {
+    console.log(SkyeKiwi.getAbi())
     console.log(this.$store.state.storage_network)
   },
   data () {
