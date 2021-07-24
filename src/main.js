@@ -16,16 +16,16 @@ import './assets/custom.scss'
 Vue.config.productionTip = false
 
 const progressBarOptions = {
-  color: '#bffaf3',
+  color: 'grey',
   failedColor: '#874b4b',
-  thickness: '5px',
+  thickness: '3px',
   transition: {
-    speed: '0.2s',
+    speed: '3s',
     opacity: '0.6s',
     termination: 300
   },
   autoRevert: true,
-  location: 'left',
+  location: 'top',
   inverse: false
 }
 
@@ -42,7 +42,7 @@ const store = new Vuex.Store({
   state: {
     active_process: 0,
     done_creating: false,
-    storage_network: 'crust'
+    blockchains: []
   },
   mutations: {
     next_step (state) {
@@ -59,8 +59,8 @@ const store = new Vuex.Store({
         state.active_process = 0
       }
     },
-    set_storage_network (state, network) {
-      state.storage_network = network
+    add_blockchain (state, blockchain) {
+      state.blockchains.push(blockchain)
     }
   }
 })

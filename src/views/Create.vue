@@ -247,9 +247,21 @@ import * as SkyeKiwi from '@skyekiwi/protocol'
 
 export default {
   name: 'Create',
-  mounted () {
-    console.log(SkyeKiwi.getAbi())
-    console.log(this.$store.state.storage_network)
+  async mounted () {
+    const mnemonic = ''
+    const blockchain = new SkyeKiwi.Blockchain(
+      // seed phrase
+      mnemonic,
+      // contract address
+      '3cNizgEgkjB8TKm8FGJD3mtcxNTwBRxWrCwa77rNTq3WaZsM',
+      // contract instance endpoint
+      'wss://jupiter-poa.elara.patract.io',
+      // storage network endpoint
+      'wss://rocky-api.crust.network/'
+    )
+    await blockchain.init()
+    const { storage, contract } = blockchain
+    console.log(storage, contract)
   },
   data () {
     return {

@@ -1,5 +1,23 @@
 <template>
   <b-row no-gutters class="h-100 template-one">
+    <el-dialog title="Pick Wallets to Connect" :visible.sync="dialogVisible">
+      <el-table :data="accounts" v-loading="init_blockchain">
+        <el-table-column property="address" label="Address"></el-table-column>
+        <el-table-column property="account_name" label="Name" width="100"></el-table-column>
+        <el-table-column
+          fixed="right"
+          width="120">
+          <template slot-scope="scope">
+            <el-button
+              @click.native.prevent="selectAccount(scope.$index, accounts)"
+              type="primary"
+              size="small">
+              Select
+            </el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </el-dialog>
     <b-col cols="12" sm="6" xl="8" class="p-5 d-none d-sm-flex justify-content-center align-items-center background-container" :style="{backgroundImage:'url('+backgroundImage+')'}"></b-col>
     <b-col cols="12" sm="6" xl="4" class="bg-light p-5 d-flex flex-column justify-content-center align-items-center shadow-lg">
       <div class="text-center my-auto">
@@ -31,6 +49,7 @@
 <script>
 import router from '@/router.js'
 import { web3Accounts, web3Enable } from '@polkadot/extension-dapp'
+import * as SkyeKiwi from '@skyekiwi/protocol'
 
 export default {
   name: 'Landing',
@@ -41,15 +60,38 @@ export default {
       disclaimer: ['easy to use', 'inexpansive', 'decentralized', 'strong cryptographic secured'],
       medium: 'https://skyekiwi.medium.com/',
       twitter: 'https://twitter.com/skyekiwi_team',
-      telegram: 'https://t.me/skyekiwi'
+      telegram: 'https://t.me/skyekiwi',
+      accounts: [],
+      dialogVisible: false,
+      init_blockchain: false
     }
   },
   methods: {
-    connect_wallet: async () => {
+    async connect_wallet () {
       await web3Enable('Kiwi·Sign')
       const allAccounts = await web3Accounts()
-      console.log(allAccounts)
-      router.push('/create')
+      this.accounts = allAccounts.map(item => {
+        return {
+          address: item.address,
+          account_name: item.meta.name,
+          selected: true,
+          signer: item
+        }
+      })
+      this.dialogVisible = true
+    },
+    async selectAccount (index, rows) {
+      this.init_blockchain = true
+      const blockchain = new SkyeKiwi.Blockchain(
+        rows[index].signer,
+        '3cNizgEgkjB8TKm8FGJD3mtcxNTwBRxWrCwa77rNTq3WaZsM',
+        'wss://jupiter-poa.elara.patract.io',
+        'wss://rocky-api.crust.network/'
+      )
+      await blockchain.init()
+      this.$store.commit('add_blockchain', blockchain)
+      this.init_blockchain = false
+      router.push('/loading/main')
     }
   }
 }
@@ -84,6 +126,9 @@ export default {
   }
   img {
     max-height: 200px;
+  }
+  .wallet_button {
+    margin-left: 20px;
   }
 }
 </style>

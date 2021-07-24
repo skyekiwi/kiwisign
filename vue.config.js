@@ -13,6 +13,7 @@ module.exports = {
       .test(/\.js$/)
       .include
         .add(/node_modules\/ipfs-core/)
+        .add(/node_modules\/@skyekiwi/)
         .end()
       .use('babel-loader')
       .loader('babel-loader');

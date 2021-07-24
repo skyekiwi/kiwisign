@@ -1,12 +1,14 @@
 import VueRouter from 'vue-router'
-import Landing from '@/components/Landing.vue'
-import Create from '@/components/Create.vue'
-import Loading from '@/components/Loading.vue'
-import Sign from '@/components/Sign.vue'
+import Landing from '@/views/Landing.vue'
+import Create from '@/views/Create.vue'
+import Loading from '@/views/Loading.vue'
+import Sign from '@/views/Sign.vue'
+import Main from '@/views/Main.vue'
 
 const router = new VueRouter({
   routes: [
     { path: '/', component: Landing },
+    { path: '/main', component: Main },
     { path: '/create', component: Create },
     { path: '/loading/:redirect', component: Loading },
     { path: '/sign/:id', component: Sign }
